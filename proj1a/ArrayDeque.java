@@ -22,8 +22,9 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     @Override
-    public void printDeque() {
+    public String printDeque() {
 
+        return null;
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface Deque<T> {
     public int size();
 
     /** Prints the items in the deque from first to last, separated by a space */
-    public void printDeque();
+    public String printDeque();
 
     /** Removes and returns the item at the front of the deque. If no such item
      * exists, return null

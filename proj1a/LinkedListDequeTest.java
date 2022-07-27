@@ -1,3 +1,9 @@
+import org.junit.Test;
+
+import java.util.Optional;
+
+import static org.junit.Assert.*;
+
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
 	
@@ -82,6 +88,68 @@ public class LinkedListDequeTest {
 
 		printTestStatus(passed);
 		*/
+	}
+
+	@Test
+	public void printDequeTest() {
+		LinkedListDeque<Integer> deque = LinkedListDeque.of(4, 2, 3);
+		assert deque != null;
+		assertEquals("4 2 3", deque.printDeque());
+	}
+
+	@Test
+	public void ofTest() {
+		LinkedListDeque<Integer> deque = LinkedListDeque.of();
+		assertNull(deque);
+
+		LinkedListDeque<Integer> deque1 = LinkedListDeque.of(1, 2, 3);
+		assertNotNull(deque1);
+		assertEquals("1 2 3", deque1.printDeque());
+	}
+
+	@Test
+	public void addFirstTest() {
+		LinkedListDeque<Integer> deque = new LinkedListDeque<>();
+		deque.addFirst(1);
+		deque.addFirst(2);
+		assertEquals("2 1", deque.printDeque());
+	}
+
+	@Test
+	public void addLastTest() {
+		LinkedListDeque<Integer> deque = new LinkedListDeque<>();
+		deque.addLast(1);
+		deque.addLast(2);
+		deque.addLast(3);
+		assertEquals("1 2 3", deque.printDeque());
+	}
+
+	@Test
+	public void isEmptyTest() {
+		LinkedListDeque<Integer> deque = new LinkedListDeque<>();
+		assertTrue(deque.isEmpty());
+
+		deque.addFirst(1);
+		assertFalse(deque.isEmpty());
+
+		LinkedListDeque<Integer> deque1 = LinkedListDeque.of(1, 2, 3);
+		assert deque1 != null;
+		assertFalse(deque1.isEmpty());
+	}
+
+	@Test
+	public void removeFirstTest() {
+		LinkedListDeque<Integer> deque = new LinkedListDeque<>();
+		assertNull(deque.removeFirst());
+
+		deque.addFirst(1);
+		assertEquals(Integer.valueOf(1), deque.removeFirst());
+
+		LinkedListDeque<Integer> deque1 = LinkedListDeque.of(3, 2, 1);
+		assert deque1 != null;
+		assertEquals(Integer.valueOf(3), deque1.removeFirst());
+		assertEquals("2 1", deque1.printDeque());
+		assertEquals(2, deque1.size());
 	}
 
 	public static void main(String[] args) {
