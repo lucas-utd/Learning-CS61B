@@ -42,13 +42,12 @@ public class LinkedListDequeTest {
 	public static void addIsEmptySizeTest() {
 		System.out.println("Running add/isEmpty/Size test.");
 		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-		/*
 		LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
 		lld1.addFirst("front");
-		
+
 		// The && operator is the same as "and" in Python.
 		// It's a binary operator that returns true if both arguments true, and false otherwise.
 		passed = checkSize(1, lld1.size()) && passed;
@@ -64,7 +63,6 @@ public class LinkedListDequeTest {
 		lld1.printDeque();
 
 		printTestStatus(passed);
-		*/
 	}
 
 	/** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
@@ -73,7 +71,6 @@ public class LinkedListDequeTest {
 		System.out.println("Running add/remove test.");
 
 		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-		/*
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 		// should be empty 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
@@ -87,7 +84,6 @@ public class LinkedListDequeTest {
 		passed = checkEmpty(true, lld1.isEmpty()) && passed;
 
 		printTestStatus(passed);
-		*/
 	}
 
 	@Test
@@ -150,6 +146,58 @@ public class LinkedListDequeTest {
 		assertEquals(Integer.valueOf(3), deque1.removeFirst());
 		assertEquals("2 1", deque1.printDeque());
 		assertEquals(2, deque1.size());
+	}
+
+	@Test
+	public void removeLastTest() {
+		LinkedListDeque<Integer> deque = new LinkedListDeque<>();
+		assertNull(deque.removeLast());
+
+		deque.addFirst(1);
+		deque.addFirst(2);
+		assertEquals(Integer.valueOf(1), deque.removeLast());
+
+		LinkedListDeque<Integer> deque1 = LinkedListDeque.of(3, 2, 1);
+		assert deque1 != null;
+		assertEquals(Integer.valueOf(1), deque1.removeLast());
+		assertEquals("3 2", deque1.printDeque());
+		assertEquals(2, deque1.size());
+	}
+
+	@Test
+	public void getTest() {
+		LinkedListDeque<Integer> deque = new LinkedListDeque<>();
+		assertNull(deque.get(0));
+
+		deque.addFirst(1);
+		deque.addFirst(2);
+		assertEquals(Integer.valueOf(2), deque.get(0));
+		assertEquals(Integer.valueOf(1), deque.get(1));
+		assertNull(deque.get(2));
+
+		LinkedListDeque<Integer> deque1 = LinkedListDeque.of(3, 2, 1);
+		assert deque1 != null;
+		assertEquals(Integer.valueOf(1), deque1.get(2));
+		assertEquals(Integer.valueOf(2), deque1.get(1));
+		assertEquals(Integer.valueOf(3), deque1.get(0));
+	}
+
+	@Test
+	public void getRecursiveTest() {
+		LinkedListDeque<Integer> deque = new LinkedListDeque<>();
+		assertNull(deque.getRecursive(0));
+
+		deque.addFirst(1);
+		deque.addFirst(2);
+		assertEquals(Integer.valueOf(2), deque.getRecursive(0));
+		assertEquals(Integer.valueOf(1), deque.getRecursive(1));
+		assertNull(deque.getRecursive(2));
+
+		LinkedListDeque<Integer> deque1 = LinkedListDeque.of(3, 2, 1);
+		assert deque1 != null;
+		assertEquals(Integer.valueOf(1), deque1.getRecursive(2));
+		assertEquals(Integer.valueOf(2), deque1.getRecursive(1));
+		assertEquals(Integer.valueOf(3), deque1.getRecursive(0));
 	}
 
 	public static void main(String[] args) {

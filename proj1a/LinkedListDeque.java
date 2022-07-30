@@ -9,14 +9,14 @@ public class LinkedListDeque<T> implements Deque<T> {
             this(input, null, null);
         }
 
-        public Node(T input, Node prev, Node next) {
+        public Node(T input, Node<T> prev, Node<T> next) {
            this.item = input;
            this.prev = prev;
            this.next = next;
         }
     }
 
-    private Node<T> sentinel;
+    private final Node<T> sentinel;
 
     private int length;
 
@@ -39,7 +39,7 @@ public class LinkedListDeque<T> implements Deque<T> {
 
         int k;
         for (k = 0, p = result.sentinel; k < args.length; k += 1, p = p.next) {
-            Node<S> newNode = new Node<>(args[k], p.next, p.next.prev);
+            Node<S> newNode = new Node<>(args[k], p, p.next);
             p.next.prev = newNode;
             p.next = newNode;
         }
@@ -100,16 +100,51 @@ public class LinkedListDeque<T> implements Deque<T> {
         firstNode.next.prev = sentinel;
         sentinel.next = firstNode.next;
 
+        length -= 1;
+
         return firstNode.item;
     }
 
     @Override
     public T removeLast() {
-        return null;
+        if (length == 0) {
+            return null;
+        }
+        Node<T> lastNode = sentinel.prev;
+        lastNode.prev.next = sentinel;
+        sentinel.prev = lastNode.prev;
+
+        length -= 1;
+
+        return lastNode.item;
     }
 
     @Override
     public T get(int index) {
-        return null;
+        if (index < 0 || index >= length)
+        {
+            return null;
+        }
+        int cur = -1;
+        Node<T> p = sentinel;
+        while (cur < index) {
+           p = p.next;
+           cur += 1;
+        }
+        return p.item;
+    }
+
+    public T getRecursive(int index) {
+        if (index < 0 || index >= length) {
+            return null;
+        }
+        return helperRecursive(index, sentinel.next);
+    }
+
+    private T helperRecursive(int index, Node<T> p) {
+        if (index == 0) {
+            return p.item;
+        }
+        return helperRecursive(index - 1, p.next);
     }
 }
