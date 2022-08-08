@@ -31,7 +31,8 @@ public class HexWorld {
             return null;
         }
         ArrayList<Point> res = new ArrayList<>();
-        if
+
+        return res;
     }
 
     @Test
@@ -47,6 +48,5 @@ public class HexWorld {
 
         TETile[][] randomTiles = new TETile[WIDTH][HEIGHT];
         addHexagon(randomTiles, new Point(0, 0), 2, Tileset.FLOWER);
-        assertEquals(new Point());
     }
 }
